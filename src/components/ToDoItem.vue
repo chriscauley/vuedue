@@ -5,7 +5,7 @@
   <i @click="cancel" class="fa fa-close ml-4 text-red-400 cursor-pointer" />
 </div>
 <div v-else class="flex select-none">
-  <input type="checkbox" :id="id" :checked="isDone" class="mr-2 mt-1 cursor-pointer" />
+  <input type="checkbox" :id="id" :checked="isDone" class="mr-2 mt-1 cursor-pointer" @click="toggle" />
   <label :for="id" class="flex-grow cursor-pointer">{{label}}</label>
   <i @click="edit" class="fa fa-edit ml-4 mt-1 flex-end"></i>
 </div>
@@ -39,6 +39,9 @@ export default {
     accept() {
       store.commit('change', this)
       this.editing = false
+    },
+    toggle() {
+      store.commit('toggle', this.id)
     }
   }
 };

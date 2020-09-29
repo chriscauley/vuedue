@@ -2,7 +2,7 @@
 <div class="mx-auto mt-16 border rounded shadow max-w-xs p-4">
   <h1>To-Do List</h1>
   <ul>
-    <li v-for="item in ToDoItems" :key="item.id">
+    <li v-for="item in todos" :key="item.id">
       <to-do-item v-bind="item"></to-do-item>
     </li>
   </ul>
@@ -23,11 +23,7 @@ export default {
   },
   store,
   data() {
-    console.log(store.state)
-    return {
-      log(a) { console.log({...a})},
-      ToDoItems: store.state.todos
-    }
+    return store.state
   },
 }
 </script>
