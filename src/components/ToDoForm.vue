@@ -18,10 +18,13 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
+  store,
   methods: {
     onSubmit() {
-      this.$emit("todo-added", this.label)
+      store.commit('add', this.label)
       this.label = ''
     },
   },

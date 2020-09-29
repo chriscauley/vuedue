@@ -3,17 +3,17 @@
   <h1>To-Do List</h1>
   <ul>
     <li v-for="item in ToDoItems" :key="item.id">
-      <to-do-item v-bind="item" @label-changed="changeLabel"></to-do-item>
+      <to-do-item v-bind="item"></to-do-item>
     </li>
   </ul>
-  <to-do-form @todo-added="addToDo"></to-do-form>
+  <to-do-form></to-do-form>
 </div>
 </template>
 
 <script>
 import ToDoItem from './components/ToDoItem.vue';
 import ToDoForm from './components/ToDoForm.vue';
-import { uniqueId } from 'lodash'
+import store from './store'
 
 export default {
   name: 'App',
@@ -21,25 +21,14 @@ export default {
     ToDoItem,
     ToDoForm,
   },
+  store,
   data() {
+    console.log(store.state)
     return {
       log(a) { console.log({...a})},
-      ToDoItems: [
-        { id: uniqueId('todo-'), label: 'Learn Vue', done: false },
-        { id: uniqueId('todo-'), label: 'Create a Vue project with the CLI', done: true },
-        { id: uniqueId('todo-'), label: 'Have fun', done: true },
-        { id: uniqueId('todo-'), label: 'Create a to-do list', done: false }
-      ]
-    };
-  },
-  methods: {
-    changeLabel(id, label) {
-      this.ToDoItems.find(i => i.id === id).label = label
-    },
-    addToDo(label) {
-      this.ToDoItems.push({id:uniqueId('todo-'), label, done: false});
+      ToDoItems: store.state.todos
     }
-  }
+  },
 }
 </script>
 

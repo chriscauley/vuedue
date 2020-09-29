@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
   props: {
     label: { required: true, type: String },
@@ -35,8 +37,8 @@ export default {
       this.editing = false
     },
     accept() {
+      store.commit('change', this)
       this.editing = false
-      this.$emit('label-changed', this.id, this.new_label)
     }
   }
 };
